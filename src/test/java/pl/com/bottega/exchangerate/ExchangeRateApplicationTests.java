@@ -125,6 +125,22 @@ public class ExchangeRateApplicationTests {
     }
 
     @Test
+    public void sameCurrencyToConvert() throws Exception {
+        saveExchangeRate("2017-01-02", "USD", 4.0);
+
+        mvc.perform(get("/calculation").
+                param("date", "2017-02-02").
+                param("from", "USD").
+                param("to", "USD").
+                param("amount", "100").
+                contentType(MediaType.APPLICATION_JSON)).
+                andExpect(status().isUnprocessableEntity()).
+                andExpect(jsonPath("$.errors.from").value("must be different than to")).
+                andExpect(jsonPath("$.errors.to").value("must be different than from"));
+        ;
+    }
+
+    @Test
     public void validationErrorsWhenDefiningRates() throws Exception {
         ExchangeRate rate = new ExchangeRate(null, null, null);
         mvc.perform(
