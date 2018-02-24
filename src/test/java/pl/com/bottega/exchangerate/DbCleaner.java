@@ -9,14 +9,13 @@ import javax.transaction.Transactional;
 @Component
 public class DbCleaner {
 
-	private static final String TRUNCATE_SCHEMA_QUERY = "TRUNCATE SCHEMA PUBLIC RESTART IDENTITY AND COMMIT NO CHECK";
-
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Transactional
 	public void clean() {
-		entityManager.createNativeQuery(TRUNCATE_SCHEMA_QUERY).executeUpdate();
+		entityManager.createNativeQuery("DELETE FROM rate").executeUpdate();
+		entityManager.createNativeQuery("TRUNCATE rate").executeUpdate();
 	}
 
 }

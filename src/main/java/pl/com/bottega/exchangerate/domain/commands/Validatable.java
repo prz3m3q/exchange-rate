@@ -1,9 +1,7 @@
 package pl.com.bottega.exchangerate.domain.commands;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 public interface Validatable {
 
@@ -31,6 +29,14 @@ public interface Validatable {
 
     default boolean isEmpty(String s) {
         return s == null || s.trim().length() == 0;
+    }
+
+    default boolean isEmpty(LocalDate s) {
+        return s == null;
+    }
+
+    default boolean isEmpty(Double s) {
+        return s == null;
     }
 
 }

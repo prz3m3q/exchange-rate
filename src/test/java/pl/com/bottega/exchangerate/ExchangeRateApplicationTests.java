@@ -126,7 +126,7 @@ public class ExchangeRateApplicationTests {
 
     @Test
     public void sameCurrencyToConvert() throws Exception {
-        saveExchangeRate("2017-01-02", "USD", 4.0);
+        saveExchangeRate("2017-02-02", "USD", 4.0);
 
         mvc.perform(get("/calculation").
                 param("date", "2017-02-02").
